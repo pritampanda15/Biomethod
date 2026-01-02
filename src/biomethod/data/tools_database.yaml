@@ -1,0 +1,611 @@
+# BioMethod Tools Database
+# Contains information about common bioinformatics tools including citations
+
+# =============================================================================
+# ALIGNMENT TOOLS
+# =============================================================================
+
+bwa:
+  aliases: ["bwa-mem", "bwa-mem2", "bwa-aln"]
+  category: "alignment"
+  description: "Burrows-Wheeler Aligner for short-read alignment to a reference genome"
+  citation: |
+    @article{li2009fast,
+      title={Fast and accurate short read alignment with {Burrows--Wheeler} transform},
+      author={Li, Heng and Durbin, Richard},
+      journal={Bioinformatics},
+      volume={25},
+      number={14},
+      pages={1754--1760},
+      year={2009},
+      publisher={Oxford University Press},
+      doi={10.1093/bioinformatics/btp324}
+    }
+  common_parameters:
+    -t: "Number of threads"
+    -M: "Mark shorter split hits as secondary"
+    -R: "Read group header line"
+
+bowtie2:
+  aliases: ["bowtie2-build", "bowtie2-inspect"]
+  category: "alignment"
+  description: "Fast and sensitive read alignment tool"
+  citation: |
+    @article{langmead2012fast,
+      title={Fast gapped-read alignment with {Bowtie 2}},
+      author={Langmead, Ben and Salzberg, Steven L},
+      journal={Nature Methods},
+      volume={9},
+      number={4},
+      pages={357--359},
+      year={2012},
+      publisher={Nature Publishing Group},
+      doi={10.1038/nmeth.1923}
+    }
+  common_parameters:
+    -x: "Index filename prefix"
+    -p: "Number of threads"
+    --very-sensitive: "Preset for very sensitive alignment"
+    --local: "Local alignment mode"
+
+hisat2:
+  aliases: ["hisat2-build"]
+  category: "alignment"
+  description: "Graph-based alignment of next generation sequencing reads to a population of genomes"
+  citation: |
+    @article{kim2019graph,
+      title={Graph-based genome alignment and genotyping with {HISAT2} and {HISAT-genotype}},
+      author={Kim, Daehwan and Paggi, Joseph M and Park, Chanhee and Bennett, Christopher and Salzberg, Steven L},
+      journal={Nature Biotechnology},
+      volume={37},
+      number={8},
+      pages={907--915},
+      year={2019},
+      publisher={Nature Publishing Group},
+      doi={10.1038/s41587-019-0201-4}
+    }
+  common_parameters:
+    -x: "Index filename prefix"
+    -p: "Number of threads"
+    --dta: "Report alignments tailored for transcript assemblers"
+
+star:
+  aliases: ["STAR", "STARsolo"]
+  category: "alignment"
+  description: "Spliced Transcripts Alignment to a Reference"
+  citation: |
+    @article{dobin2013star,
+      title={{STAR}: ultrafast universal {RNA-seq} aligner},
+      author={Dobin, Alexander and Davis, Carrie A and Schlesinger, Felix and Drenkow, Jorg and Zaleski, Chris and Jha, Sonali and Batut, Philippe and Chaisson, Mark and Gingeras, Thomas R},
+      journal={Bioinformatics},
+      volume={29},
+      number={1},
+      pages={15--21},
+      year={2013},
+      publisher={Oxford University Press},
+      doi={10.1093/bioinformatics/bts635}
+    }
+  common_parameters:
+    --runThreadN: "Number of threads"
+    --genomeDir: "Path to genome directory"
+    --outSAMtype: "Output SAM/BAM type"
+    --quantMode: "Quantification mode"
+
+minimap2:
+  aliases: []
+  category: "alignment"
+  description: "Versatile pairwise aligner for genomic and spliced nucleotide sequences"
+  citation: |
+    @article{li2018minimap2,
+      title={Minimap2: pairwise alignment for nucleotide sequences},
+      author={Li, Heng},
+      journal={Bioinformatics},
+      volume={34},
+      number={18},
+      pages={3094--3100},
+      year={2018},
+      publisher={Oxford University Press},
+      doi={10.1093/bioinformatics/bty191}
+    }
+  common_parameters:
+    -t: "Number of threads"
+    -x: "Preset"
+    -a: "Output in SAM format"
+
+# =============================================================================
+# QUANTIFICATION TOOLS
+# =============================================================================
+
+salmon:
+  aliases: []
+  category: "quantification"
+  description: "Fast and bias-aware quantification of transcript expression"
+  citation: |
+    @article{patro2017salmon,
+      title={Salmon provides fast and bias-aware quantification of transcript expression},
+      author={Patro, Rob and Duggal, Geet and Love, Michael I and Irizarry, Rafael A and Kingsford, Carl},
+      journal={Nature Methods},
+      volume={14},
+      number={4},
+      pages={417--419},
+      year={2017},
+      publisher={Nature Publishing Group},
+      doi={10.1038/nmeth.4197}
+    }
+  common_parameters:
+    -i: "Index directory"
+    -l: "Library type"
+    -p: "Number of threads"
+    --validateMappings: "Validate mappings"
+
+kallisto:
+  aliases: []
+  category: "quantification"
+  description: "Near-optimal probabilistic RNA-seq quantification"
+  citation: |
+    @article{bray2016near,
+      title={Near-optimal probabilistic {RNA-seq} quantification},
+      author={Bray, Nicolas L and Pimentel, Harold and Melsted, P{\'a}ll and Pachter, Lior},
+      journal={Nature Biotechnology},
+      volume={34},
+      number={5},
+      pages={525--527},
+      year={2016},
+      publisher={Nature Publishing Group},
+      doi={10.1038/nbt.3519}
+    }
+  common_parameters:
+    -i: "Index file"
+    -o: "Output directory"
+    -t: "Number of threads"
+    -b: "Number of bootstrap samples"
+
+rsem:
+  aliases: ["rsem-calculate-expression", "rsem-prepare-reference"]
+  category: "quantification"
+  description: "RNA-Seq by Expectation-Maximization for transcript quantification"
+  citation: |
+    @article{li2011rsem,
+      title={{RSEM}: accurate transcript quantification from {RNA-Seq} data with or without a reference genome},
+      author={Li, Bo and Dewey, Colin N},
+      journal={BMC Bioinformatics},
+      volume={12},
+      number={1},
+      pages={323},
+      year={2011},
+      publisher={BioMed Central},
+      doi={10.1186/1471-2105-12-323}
+    }
+  common_parameters:
+    -p: "Number of threads"
+    --paired-end: "Paired-end reads"
+    --star: "Use STAR aligner"
+
+featurecounts:
+  aliases: ["featureCounts", "subread"]
+  category: "quantification"
+  description: "Read counting program for genomic features"
+  citation: |
+    @article{liao2014featurecounts,
+      title={{featureCounts}: an efficient general purpose program for assigning sequence reads to genomic features},
+      author={Liao, Yang and Smyth, Gordon K and Shi, Wei},
+      journal={Bioinformatics},
+      volume={30},
+      number={7},
+      pages={923--930},
+      year={2014},
+      publisher={Oxford University Press},
+      doi={10.1093/bioinformatics/btt656}
+    }
+  common_parameters:
+    -T: "Number of threads"
+    -a: "Annotation file"
+    -o: "Output file"
+    -p: "Paired-end mode"
+    -t: "Feature type"
+
+htseq:
+  aliases: ["htseq-count", "HTSeq"]
+  category: "quantification"
+  description: "Python framework to process high-throughput sequencing data"
+  citation: |
+    @article{anders2015htseq,
+      title={{HTSeq}--a {Python} framework to work with high-throughput sequencing data},
+      author={Anders, Simon and Pyl, Paul Theodor and Huber, Wolfgang},
+      journal={Bioinformatics},
+      volume={31},
+      number={2},
+      pages={166--169},
+      year={2015},
+      publisher={Oxford University Press},
+      doi={10.1093/bioinformatics/btu638}
+    }
+  common_parameters:
+    -m: "Mode (union, intersection-strict, intersection-nonempty)"
+    -s: "Strandedness"
+    -t: "Feature type"
+
+stringtie:
+  aliases: []
+  category: "quantification"
+  description: "Transcript assembly and quantification for RNA-seq"
+  citation: |
+    @article{pertea2015stringtie,
+      title={{StringTie} enables improved reconstruction of a transcriptome from {RNA-seq} reads},
+      author={Pertea, Mihaela and Pertea, Geo M and Antonescu, Corina M and Chang, Tsung-Cheng and Mendell, Joshua T and Salzberg, Steven L},
+      journal={Nature Biotechnology},
+      volume={33},
+      number={3},
+      pages={290--295},
+      year={2015},
+      publisher={Nature Publishing Group},
+      doi={10.1038/nbt.3122}
+    }
+  common_parameters:
+    -G: "Reference annotation GTF"
+    -o: "Output GTF file"
+    -p: "Number of threads"
+    -e: "Expression estimation mode"
+
+# =============================================================================
+# PREPROCESSING / QC TOOLS
+# =============================================================================
+
+fastqc:
+  aliases: []
+  category: "quality-control"
+  description: "Quality control tool for high throughput sequence data"
+  citation: |
+    @misc{andrews2010fastqc,
+      title={{FastQC}: A Quality Control Tool for High Throughput Sequence Data},
+      author={Andrews, Simon and others},
+      year={2010},
+      howpublished={\url{http://www.bioinformatics.babraham.ac.uk/projects/fastqc/}}
+    }
+  common_parameters:
+    -o: "Output directory"
+    -t: "Number of threads"
+    --noextract: "Do not uncompress output"
+
+multiqc:
+  aliases: []
+  category: "quality-control"
+  description: "Aggregate results from bioinformatics analyses into a single report"
+  citation: |
+    @article{ewels2016multiqc,
+      title={{MultiQC}: summarize analysis results for multiple tools and samples in a single report},
+      author={Ewels, Philip and Magnusson, M{\aa}ns and Lundin, Sverker and K{\"a}ller, Max},
+      journal={Bioinformatics},
+      volume={32},
+      number={19},
+      pages={3047--3048},
+      year={2016},
+      publisher={Oxford University Press},
+      doi={10.1093/bioinformatics/btw354}
+    }
+  common_parameters:
+    -o: "Output directory"
+    -n: "Report filename"
+    -f: "Force overwrite"
+
+trimmomatic:
+  aliases: []
+  category: "preprocessing"
+  description: "Flexible read trimming tool for Illumina sequence data"
+  citation: |
+    @article{bolger2014trimmomatic,
+      title={{Trimmomatic}: a flexible trimmer for {Illumina} sequence data},
+      author={Bolger, Anthony M and Lohse, Marc and Usadel, Bjoern},
+      journal={Bioinformatics},
+      volume={30},
+      number={15},
+      pages={2114--2120},
+      year={2014},
+      publisher={Oxford University Press},
+      doi={10.1093/bioinformatics/btu170}
+    }
+  common_parameters:
+    ILLUMINACLIP: "Adapter removal"
+    LEADING: "Cut bases from start"
+    TRAILING: "Cut bases from end"
+    SLIDINGWINDOW: "Sliding window trimming"
+    MINLEN: "Minimum length"
+
+fastp:
+  aliases: []
+  category: "preprocessing"
+  description: "Ultra-fast all-in-one FASTQ preprocessor"
+  citation: |
+    @article{chen2018fastp,
+      title={fastp: an ultra-fast all-in-one {FASTQ} preprocessor},
+      author={Chen, Shifu and Zhou, Yanqing and Chen, Yaru and Gu, Jia},
+      journal={Bioinformatics},
+      volume={34},
+      number={17},
+      pages={i884--i890},
+      year={2018},
+      publisher={Oxford University Press},
+      doi={10.1093/bioinformatics/bty560}
+    }
+  common_parameters:
+    -i: "Input file 1"
+    -I: "Input file 2"
+    -o: "Output file 1"
+    -O: "Output file 2"
+    -w: "Number of worker threads"
+
+cutadapt:
+  aliases: []
+  category: "preprocessing"
+  description: "Remove adapter sequences from sequencing reads"
+  citation: |
+    @article{martin2011cutadapt,
+      title={Cutadapt removes adapter sequences from high-throughput sequencing reads},
+      author={Martin, Marcel},
+      journal={EMBnet.journal},
+      volume={17},
+      number={1},
+      pages={10--12},
+      year={2011},
+      doi={10.14806/ej.17.1.200}
+    }
+  common_parameters:
+    -a: "3' adapter sequence"
+    -A: "3' adapter for read 2"
+    -g: "5' adapter sequence"
+    -m: "Minimum length"
+
+# =============================================================================
+# VARIANT CALLING / SAM/BAM TOOLS
+# =============================================================================
+
+samtools:
+  aliases: []
+  category: "alignment"
+  description: "Suite of programs for interacting with high-throughput sequencing data"
+  citation: |
+    @article{li2009sequence,
+      title={The {Sequence Alignment/Map} format and {SAMtools}},
+      author={Li, Heng and Handsaker, Bob and Wysoker, Alec and Fennell, Tim and Ruan, Jue and Homer, Nils and Marth, Gabor and Abecasis, Goncalo and Durbin, Richard and others},
+      journal={Bioinformatics},
+      volume={25},
+      number={16},
+      pages={2078--2079},
+      year={2009},
+      publisher={Oxford University Press},
+      doi={10.1093/bioinformatics/btp352}
+    }
+  common_parameters:
+    -@: "Number of threads"
+    -b: "Output BAM"
+    -S: "Input is SAM"
+    -q: "Minimum mapping quality"
+
+bcftools:
+  aliases: []
+  category: "variant-calling"
+  description: "Utilities for variant calling and manipulating VCFs and BCFs"
+  citation: |
+    @article{danecek2021twelve,
+      title={Twelve years of {SAMtools} and {BCFtools}},
+      author={Danecek, Petr and Bonfield, James K and Liddle, Jennifer and Marshall, John and Ohan, Valeriu and Pollard, Martin O and Whitwham, Andrew and Keane, Thomas and McCarthy, Shane A and Davies, Robert M and others},
+      journal={Gigascience},
+      volume={10},
+      number={2},
+      pages={giab008},
+      year={2021},
+      publisher={Oxford University Press},
+      doi={10.1093/gigascience/giab008}
+    }
+  common_parameters:
+    -O: "Output type"
+    -o: "Output file"
+    --threads: "Number of threads"
+
+gatk:
+  aliases: ["GATK"]
+  category: "variant-calling"
+  description: "Genome Analysis Toolkit for variant discovery"
+  citation: |
+    @article{mckenna2010genome,
+      title={The {Genome Analysis Toolkit}: a {MapReduce} framework for analyzing next-generation {DNA} sequencing data},
+      author={McKenna, Aaron and Hanna, Matthew and Banks, Eric and Sivachenko, Andrey and Cibulskis, Kristian and Kernytsky, Andrew and Garimella, Kiran and Altshuler, David and Gabriel, Stacey and Daly, Mark and others},
+      journal={Genome Research},
+      volume={20},
+      number={9},
+      pages={1297--1303},
+      year={2010},
+      publisher={Cold Spring Harbor Lab},
+      doi={10.1101/gr.107524.110}
+    }
+  common_parameters:
+    -R: "Reference genome"
+    -I: "Input BAM file"
+    -O: "Output file"
+    --java-options: "Java options"
+
+picard:
+  aliases: ["Picard"]
+  category: "alignment"
+  description: "Java tools for manipulating high-throughput sequencing data"
+  citation: |
+    @misc{picard2019,
+      title={Picard Toolkit},
+      author={{Broad Institute}},
+      year={2019},
+      howpublished={\url{http://broadinstitute.github.io/picard/}}
+    }
+  common_parameters:
+    INPUT: "Input file"
+    OUTPUT: "Output file"
+    VALIDATION_STRINGENCY: "Validation stringency"
+
+bedtools:
+  aliases: []
+  category: "genomics"
+  description: "Swiss-army knife of tools for genome arithmetic"
+  citation: |
+    @article{quinlan2010bedtools,
+      title={{BEDTools}: a flexible suite of utilities for comparing genomic features},
+      author={Quinlan, Aaron R and Hall, Ira M},
+      journal={Bioinformatics},
+      volume={26},
+      number={6},
+      pages={841--842},
+      year={2010},
+      publisher={Oxford University Press},
+      doi={10.1093/bioinformatics/btq033}
+    }
+  common_parameters:
+    -a: "Input file A"
+    -b: "Input file B"
+
+# =============================================================================
+# DIFFERENTIAL EXPRESSION
+# =============================================================================
+
+deseq2:
+  aliases: ["DESeq2", "DESeq"]
+  category: "differential-expression"
+  description: "Differential gene expression analysis based on the negative binomial distribution"
+  citation: |
+    @article{love2014moderated,
+      title={Moderated estimation of fold change and dispersion for {RNA-seq} data with {DESeq2}},
+      author={Love, Michael I and Huber, Wolfgang and Anders, Simon},
+      journal={Genome Biology},
+      volume={15},
+      number={12},
+      pages={550},
+      year={2014},
+      publisher={BioMed Central},
+      doi={10.1186/s13059-014-0550-8}
+    }
+  common_parameters:
+    design: "Design formula"
+    alpha: "FDR threshold"
+
+edger:
+  aliases: ["edgeR"]
+  category: "differential-expression"
+  description: "Empirical Analysis of Digital Gene Expression Data in R"
+  citation: |
+    @article{robinson2010edger,
+      title={{edgeR}: a {Bioconductor} package for differential expression analysis of digital gene expression data},
+      author={Robinson, Mark D and McCarthy, Davis J and Smyth, Gordon K},
+      journal={Bioinformatics},
+      volume={26},
+      number={1},
+      pages={139--140},
+      year={2010},
+      publisher={Oxford University Press},
+      doi={10.1093/bioinformatics/btp616}
+    }
+  common_parameters:
+    group: "Sample grouping"
+
+limma:
+  aliases: []
+  category: "differential-expression"
+  description: "Linear Models for Microarray and RNA-Seq Data"
+  citation: |
+    @article{ritchie2015limma,
+      title={limma powers differential expression analyses for {RNA}-sequencing and microarray studies},
+      author={Ritchie, Matthew E and Phipson, Belinda and Wu, DI and Hu, Yifang and Law, Charity W and Shi, Wei and Smyth, Gordon K},
+      journal={Nucleic Acids Research},
+      volume={43},
+      number={7},
+      pages={e47--e47},
+      year={2015},
+      publisher={Oxford University Press},
+      doi={10.1093/nar/gkv007}
+    }
+  common_parameters:
+    design: "Design matrix"
+
+# =============================================================================
+# SINGLE-CELL ANALYSIS
+# =============================================================================
+
+scanpy:
+  aliases: []
+  category: "single-cell"
+  description: "Single-Cell Analysis in Python"
+  citation: |
+    @article{wolf2018scanpy,
+      title={{SCANPY}: large-scale single-cell gene expression data analysis},
+      author={Wolf, F Alexander and Angerer, Philipp and Theis, Fabian J},
+      journal={Genome Biology},
+      volume={19},
+      number={1},
+      pages={15},
+      year={2018},
+      publisher={BioMed Central},
+      doi={10.1186/s13059-017-1382-0}
+    }
+  common_parameters:
+    n_neighbors: "Number of neighbors for KNN"
+    n_pcs: "Number of principal components"
+
+seurat:
+  aliases: ["Seurat"]
+  category: "single-cell"
+  description: "R toolkit for single cell genomics"
+  citation: |
+    @article{hao2021integrated,
+      title={Integrated analysis of multimodal single-cell data},
+      author={Hao, Yuhan and Hao, Stephanie and Andersen-Nissen, Erica and Mauck III, William M and Zheng, Shiwei and Butler, Andrew and Lee, Maddie J and Wilk, Aaron J and Darby, Charlotte and Zager, Michael and others},
+      journal={Cell},
+      volume={184},
+      number={13},
+      pages={3573--3587},
+      year={2021},
+      publisher={Elsevier},
+      doi={10.1016/j.cell.2021.04.048}
+    }
+  common_parameters:
+    min.cells: "Minimum cells per feature"
+    min.features: "Minimum features per cell"
+    dims: "Dimensions to use"
+
+# =============================================================================
+# GENERAL BIOINFORMATICS
+# =============================================================================
+
+biopython:
+  aliases: ["Bio", "BioPython"]
+  category: "general"
+  description: "Python tools for computational molecular biology"
+  citation: |
+    @article{cock2009biopython,
+      title={{Biopython}: freely available {Python} tools for computational molecular biology and bioinformatics},
+      author={Cock, Peter JA and Antao, Tiago and Chang, Jeffrey T and Chapman, Brad A and Cox, Cymon J and Dalke, Andrew and Friedberg, Iddo and Hamelryck, Thomas and Kauff, Frank and Wilczynski, Bartek and others},
+      journal={Bioinformatics},
+      volume={25},
+      number={11},
+      pages={1422--1423},
+      year={2009},
+      publisher={Oxford University Press},
+      doi={10.1093/bioinformatics/btp163}
+    }
+  common_parameters: {}
+
+clusterprofiler:
+  aliases: ["clusterProfiler"]
+  category: "enrichment"
+  description: "Statistical analysis and visualization of functional profiles for genes and gene clusters"
+  citation: |
+    @article{wu2021clusterprofiler,
+      title={{clusterProfiler 4.0}: A universal enrichment tool for interpreting omics data},
+      author={Wu, Tianzhi and Hu, Erqiang and Xu, Shuangbin and Chen, Meijun and Guo, Pingfan and Dai, Zehan and Feng, Tingze and Zhou, Lang and Tang, Wenli and Zhan, Li and others},
+      journal={The Innovation},
+      volume={2},
+      number={3},
+      pages={100141},
+      year={2021},
+      publisher={Elsevier},
+      doi={10.1016/j.xinn.2021.100141}
+    }
+  common_parameters:
+    OrgDb: "Organism annotation database"
+    pvalueCutoff: "P-value cutoff"
+    qvalueCutoff: "Q-value cutoff"

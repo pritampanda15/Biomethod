@@ -1,0 +1,90 @@
+# Common parameter descriptions for bioinformatics tools
+
+# Generic parameters
+common:
+  -t: "number of threads"
+  -p: "number of threads/processors"
+  --threads: "number of threads"
+  -o: "output file/directory"
+  -O: "output file/directory"
+  --output: "output file/directory"
+  -i: "input file"
+  -I: "input file"
+  --input: "input file"
+  -h: "display help message"
+  --help: "display help message"
+  -v: "verbose output"
+  --verbose: "verbose output"
+  --version: "display version information"
+  -q: "quiet mode"
+  --quiet: "quiet mode"
+
+# Alignment parameters
+alignment:
+  -x: "index prefix"
+  -1: "first read file (paired-end)"
+  -2: "second read file (paired-end)"
+  -U: "unpaired reads file"
+  -S: "SAM output file"
+  --local: "local alignment mode"
+  --end-to-end: "end-to-end alignment mode"
+  --very-sensitive: "very sensitive preset"
+  --sensitive: "sensitive preset"
+  --fast: "fast preset"
+  -M: "mark shorter split hits as secondary"
+  -R: "read group header"
+
+# Read counting parameters
+quantification:
+  -a: "annotation file (GTF/GFF)"
+  -g: "gene ID attribute"
+  -t: "feature type"
+  -s: "strandedness (0=unstranded, 1=stranded, 2=reverse)"
+  --minReadLength: "minimum read length"
+  -m: "counting mode (union, intersection-strict)"
+
+# QC parameters
+quality_control:
+  --noextract: "do not extract zip archive"
+  -f: "force overwrite"
+  --outdir: "output directory"
+  -c: "configuration file"
+
+# Trimming parameters
+preprocessing:
+  -m: "minimum read length"
+  --minlen: "minimum read length"
+  -q: "quality threshold"
+  --quality: "quality threshold"
+  --adapter: "adapter sequence"
+  -a: "3' adapter sequence"
+  -g: "5' adapter sequence"
+  -e: "error rate"
+  --length: "read length threshold"
+
+# Variant calling parameters
+variant_calling:
+  -R: "reference genome"
+  -L: "intervals/regions"
+  -ploidy: "sample ploidy"
+  --min-base-quality: "minimum base quality"
+  --min-mapping-quality: "minimum mapping quality"
+  -f: "reference FASTA file"
+
+# SAM/BAM parameters
+sam_bam:
+  -b: "output BAM format"
+  -S: "input is SAM format"
+  -h: "include header"
+  -F: "exclude reads with flags"
+  -f: "require reads with flags"
+  -q: "minimum mapping quality"
+  "@": "number of BAM compression threads"
+
+# Statistical parameters
+statistics:
+  --pvalue: "p-value threshold"
+  --fdr: "false discovery rate threshold"
+  --padj: "adjusted p-value threshold"
+  --lfc: "log2 fold change threshold"
+  --alpha: "significance level"

@@ -1,0 +1,71 @@
+{# Generic Methods Section Template #}
+{# This template generates a methods section in a generic academic style #}
+
+{% macro format_tool(tool, include_versions, include_citations) -%}
+{{ tool.name }}
+{%- if include_versions and tool.version %} (v{{ tool.version }}){% endif %}
+{%- if include_citations and tool.citation %} [{{ tool.name | replace(" ", "_") }}]{% endif %}
+{%- endmacro %}
+
+{% macro format_tool_list(tools, include_versions, include_citations) -%}
+{% set tool_strs = [] %}
+{% for tool in tools %}
+{% set _ = tool_strs.append(format_tool(tool, include_versions, include_citations)) %}
+{% endfor %}
+{% if tool_strs | length == 1 %}
+{{ tool_strs[0] }}
+{%- elif tool_strs | length == 2 %}
+{{ tool_strs[0] }} and {{ tool_strs[1] }}
+{%- else %}
+{{ tool_strs[:-1] | join(", ") }}, and {{ tool_strs[-1] }}
+{%- endif %}
+{%- endmacro %}
+
+## Methods
+
+{% if analysis.workflow_type %}
+This analysis was implemented as a {{ analysis.workflow_type }} workflow.
+{% endif %}
+
+{% for category in category_order %}
+{% if category in tools_by_category %}
+{% set tools = tools_by_category[category] %}
+{% set unique_tools = [] %}
+{% set seen_names = [] %}
+{% for tool in tools %}
+{% if tool.name not in seen_names %}
+{% set _ = seen_names.append(tool.name) %}
+{% set _ = unique_tools.append(tool) %}
+{% endif %}
+{% endfor %}
+
+{% if category == "preprocessing" %}
+Raw sequencing reads were preprocessed using {{ format_tool_list(unique_tools, include_versions, include_citations) }}.
+{% elif category == "quality-control" %}
+Quality control was performed using {{ format_tool_list(unique_tools, include_versions, include_citations) }}.
+{% elif category == "alignment" %}
+Sequence alignment was performed using {{ format_tool_list(unique_tools, include_versions, include_citations) }}.
+{% elif category == "quantification" %}
+Gene expression quantification was performed using {{ format_tool_list(unique_tools, include_versions, include_citations) }}.
+{% elif category == "variant-calling" %}
+Variant calling was performed using {{ format_tool_list(unique_tools, include_versions, include_citations) }}.
+{% elif category == "differential-expression" %}
+Differential expression analysis was conducted using {{ format_tool_list(unique_tools, include_versions, include_citations) }}.
+{% elif category == "enrichment" %}
+Functional enrichment analysis was performed using {{ format_tool_list(unique_tools, include_versions, include_citations) }}.
+{% elif category == "single-cell" %}
+Single-cell analysis was performed using {{ format_tool_list(unique_tools, include_versions, include_citations) }}.
+{% elif category == "genomics" %}
+Genomic analysis was performed using {{ format_tool_list(unique_tools, include_versions, include_citations) }}.
+{% elif category == "visualization" %}
+Data visualization was performed using {{ format_tool_list(unique_tools, include_versions, include_citations) }}.
+{% else %}
+Additional analysis was performed using {{ format_tool_list(unique_tools, include_versions, include_citations) }}.
+{% endif %}
+
+{% endif %}
+{% endfor %}
+
+{% if analysis.environment.python_version %}
+All Python-based analyses were performed using Python {{ analysis.environment.python_version }}.
+{% endif %}

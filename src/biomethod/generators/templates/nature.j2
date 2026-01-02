@@ -1,0 +1,57 @@
+{# Nature Methods Style Template #}
+{# Concise, methods focused on reproducibility #}
+
+{% macro format_tool(tool) -%}
+{{ tool.name }}
+{%- endmacro %}
+
+{% macro format_tool_list(tools) -%}
+{% set tool_names = tools | map(attribute='name') | unique | list %}
+{% if tool_names | length == 1 %}
+{{ tool_names[0] }}
+{%- elif tool_names | length == 2 %}
+{{ tool_names[0] }} and {{ tool_names[1] }}
+{%- else %}
+{{ tool_names[:-1] | join(", ") }} and {{ tool_names[-1] }}
+{%- endif %}
+{%- endmacro %}
+
+**Methods**
+
+{% set has_preprocessing = "preprocessing" in tools_by_category or "quality-control" in tools_by_category %}
+{% set has_alignment = "alignment" in tools_by_category %}
+{% set has_quant = "quantification" in tools_by_category %}
+{% set has_de = "differential-expression" in tools_by_category %}
+{% set has_sc = "single-cell" in tools_by_category %}
+
+{% if has_preprocessing %}
+**Data preprocessing.**
+{% if "preprocessing" in tools_by_category %}
+Raw reads were processed using {{ format_tool_list(tools_by_category["preprocessing"]) }}.
+{% endif %}
+{% if "quality-control" in tools_by_category %}
+Quality metrics were assessed using {{ format_tool_list(tools_by_category["quality-control"]) }}.
+{% endif %}
+{% endif %}
+
+{% if has_alignment %}
+**Alignment.**
+Reads were mapped to the reference genome using {{ format_tool_list(tools_by_category["alignment"]) }}.
+{% endif %}
+
+{% if has_quant %}
+**Quantification.**
+Expression levels were quantified using {{ format_tool_list(tools_by_category["quantification"]) }}.
+{% endif %}
+
+{% if has_de %}
+**Differential expression.**
+Differential expression analysis was performed using {{ format_tool_list(tools_by_category["differential-expression"]) }}.
+{% endif %}
+
+{% if has_sc %}
+**Single-cell analysis.**
+Single-cell RNA-seq data was analyzed using {{ format_tool_list(tools_by_category["single-cell"]) }}.
+{% endif %}
+
+**Software versions.** Detailed software versions are provided in Supplementary Table 1.

@@ -1,0 +1,105 @@
+{# Bioinformatics (Oxford) Style Template #}
+{# Detailed methods with versions and parameters #}
+
+{% macro format_tool(tool, include_versions, include_citations) -%}
+{{ tool.name }}
+{%- if include_versions and tool.version %} (version {{ tool.version }}){% endif %}
+{%- if include_citations and tool.citation %} ({{ tool.name | replace(" ", "_") }}){% endif %}
+{%- endmacro %}
+
+{% macro format_params(params) -%}
+{% if params %}
+{% set param_strs = [] %}
+{% for key, value in params.items() %}
+{% if value is sameas true %}
+{% set _ = param_strs.append(key) %}
+{% elif value != "<variable>" %}
+{% set _ = param_strs.append(key ~ "=" ~ value) %}
+{% endif %}
+{% endfor %}
+{% if param_strs %}
+with parameters: {{ param_strs | join(", ") }}
+{%- endif %}
+{% endif %}
+{%- endmacro %}
+
+# Methods
+
+## Data Processing and Analysis
+
+{% if "preprocessing" in tools_by_category or "quality-control" in tools_by_category %}
+### Quality Control and Preprocessing
+
+{% if "quality-control" in tools_by_category %}
+{% for tool in tools_by_category["quality-control"] %}
+Quality assessment of raw sequencing data was performed using {{ format_tool(tool, include_versions, include_citations) }}{{ format_params(tool.parameters) }}.
+{% endfor %}
+{% endif %}
+
+{% if "preprocessing" in tools_by_category %}
+{% for tool in tools_by_category["preprocessing"] %}
+Read preprocessing was performed using {{ format_tool(tool, include_versions, include_citations) }}{{ format_params(tool.parameters) }}.
+{% endfor %}
+{% endif %}
+{% endif %}
+
+{% if "alignment" in tools_by_category %}
+### Sequence Alignment
+
+{% for tool in tools_by_category["alignment"] %}
+{% if tool.name in ["bwa", "bowtie2", "hisat2", "star", "minimap2"] %}
+Sequence alignment to the reference genome was performed using {{ format_tool(tool, include_versions, include_citations) }}{{ format_params(tool.parameters) }}.
+{% elif tool.name == "samtools" %}
+BAM file processing was performed using {{ format_tool(tool, include_versions, include_citations) }}.
+{% elif tool.name == "picard" %}
+Duplicate marking and read group assignment were performed using {{ format_tool(tool, include_versions, include_citations) }}.
+{% endif %}
+{% endfor %}
+{% endif %}
+
+{% if "quantification" in tools_by_category %}
+### Expression Quantification
+
+{% for tool in tools_by_category["quantification"] %}
+Transcript/gene expression levels were quantified using {{ format_tool(tool, include_versions, include_citations) }}{{ format_params(tool.parameters) }}.
+{% endfor %}
+{% endif %}
+
+{% if "differential-expression" in tools_by_category %}
+### Differential Expression Analysis
+
+{% for tool in tools_by_category["differential-expression"] %}
+Differential expression analysis was performed using {{ format_tool(tool, include_versions, include_citations) }}{{ format_params(tool.parameters) }}.
+{% endfor %}
+{% endif %}
+
+{% if "variant-calling" in tools_by_category %}
+### Variant Calling
+
+{% for tool in tools_by_category["variant-calling"] %}
+Variant calling was performed using {{ format_tool(tool, include_versions, include_citations) }}{{ format_params(tool.parameters) }}.
+{% endfor %}
+{% endif %}
+
+{% if "single-cell" in tools_by_category %}
+### Single-Cell Analysis
+
+{% for tool in tools_by_category["single-cell"] %}
+Single-cell RNA-seq analysis was performed using {{ format_tool(tool, include_versions, include_citations) }}{{ format_params(tool.parameters) }}.
+{% endfor %}
+{% endif %}
+
+{% if "enrichment" in tools_by_category %}
+### Functional Enrichment Analysis
+
+{% for tool in tools_by_category["enrichment"] %}
+Functional enrichment analysis was performed using {{ format_tool(tool, include_versions, include_citations) }}{{ format_params(tool.parameters) }}.
+{% endfor %}
+{% endif %}
+
+## Software Availability
+
+All analyses were performed using the software versions listed in Supplementary Table S1.
+{% if analysis.environment.python_version %}
+Python version {{ analysis.environment.python_version }} was used for Python-based analyses.
+{% endif %}
