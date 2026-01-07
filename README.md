@@ -170,11 +170,11 @@ your_tool:
   category: "alignment"
   description: "Description of the tool"
   citation: |
-    @article{author2024tool,
+    @article{author2026tool,
       title={Your Tool Paper},
       author={Author, Name},
       journal={Journal},
-      year={2024}
+      year={2026}
     }
   common_parameters:
     -t: "Number of threads"
