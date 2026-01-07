@@ -22,8 +22,8 @@ pip install biomethod
 Or install from source:
 
 ```bash
-git clone https://github.com/biomethod/biomethod.git
-cd biomethod
+git clone https://github.com/pritam/Biomethod.git
+cd Biomethod
 pip install -e .
 ```
 
@@ -190,5 +190,5 @@ If you use BioMethod in your research, please cite:
 
 ```
 BioMethod: Automated methods section generator for bioinformatics papers
-https://github.com/biomethod/biomethod
+https://github.com/pritam/Biomethod
 ```

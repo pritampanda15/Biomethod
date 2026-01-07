@@ -48,9 +48,9 @@ dev = [
 biomethod = "biomethod.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/biomethod/biomethod"
-Documentation = "https://biomethod.readthedocs.io"
-Repository = "https://github.com/biomethod/biomethod"
+Homepage = "https://github.com/pritam/Biomethod"
+Repository = "https://github.com/pritam/Biomethod"
+Issues = "https://github.com/pritam/Biomethod/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]
