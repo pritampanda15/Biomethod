@@ -1,5 +1,9 @@
 # BioMethod
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python Version](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
+[![Development Status](https://img.shields.io/badge/status-alpha-orange.svg)](https://github.com/pritam/Biomethod)
+
 **Automated methods section generator for bioinformatics papers**
 
 BioMethod scans bioinformatics code (Python scripts, Jupyter notebooks, R scripts, Nextflow/Snakemake workflows) and automatically generates publication-ready methods sections with all software versions, parameters, and citations.
